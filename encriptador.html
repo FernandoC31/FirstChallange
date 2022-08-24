@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>First challenges</title>
+        <link rel="stylesheet" href="Style1 copy.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        
+    </head>
+    <header class="LogoAlura">
+        <h1> <img src="LogoAlura.png" alt="LogoAlura"></h1>
+    </header>
+
+    <body class="Animacion">
+        <main>        
+            <div class="Textos">
+                <textarea class="Texto1" id="Texto1" required placeholder="Introduzca el texto aqui"></textarea>
+                <div class="Texto2">
+                    <div class="textoencriptado" id="textoencriptado">
+                        <p class="TextoCuadro" id="TextoCuadro"></p>
+                        <img src="Muñeco.png" alt="Muñeco"class="ImgMuñeco" id="ImgMuñeco">
+                        <p class="textoN1" id="textoN1">Ningún mensaje fue encontrado</p>
+                        <p class="textoN2" id="textoN2">Ingrese el texto que desees encriptar o desencriptar</p>
+                        <input type="button" value="Copiar" class="botonCop" id="botonCop" onclick="Copiar()">
+                    </div>
+                    
+
+                </div>  
+            </div>  
+            <div class="botones">
+                    <input type="button" value="Encriptar" class="botonEn" id="botonEn" onclick="Encriptar()">
+                    <input type="button" value="Desencriptar" class ="botonDes" id="botonDes" onclick="Desencriptar()">
+            </div> 
+           
+            
+        </main>
+        
+        
+
+        <footer>
+            <div class="redes">
+                <a class="iconos" href="https://www.instagram.com/luiscamargo.31/" target="_blank">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                </a>
+
+                <a class="iconos" href="https://github.com/FernandoC31" target="_blank">
+                    <ion-icon name="logo-github"></ion-icon>
+                </a>
+
+                <a class="iconos" href="https://www.tiktok.com/@luiscn3108" target="_blank">
+                    <ion-icon name="logo-tiktok"></ion-icon>
+                </a>
+            </div>
+
+            <p class="copyright">&copy Copyright Luis Camargo 2022</p>
+
+        </footer>
+        
+    </body>
+
+<script>
+
+    var encriptado = false
+    var desencriptar = false
+    var Texto2 =""
+    var lista1=["a","e","i","o","u"]
+    var lista2=["1","2","3","4","5"]
+    var lista3=["ai","enter", "imes", "ober", "ufat"]
+
+
+    document.getElementById("botonCop").style.display="none"
+    
+    
+
+    function EncripVocales(frase){
+        for (var i=0;i<lista2.length;i++){
+            frase=frase.replace(new RegExp(lista1[i],"gi"),lista2[i]);
+        }
+
+        for(var j=0;j<lista3.length;j++){
+            frase=frase.replace(new RegExp(lista2[j],"gi"),lista3[j]);
+        }
+        return frase
+    }
+
+    function DesencripVocales(frase){
+        for (var i=0;i<lista2.length;i++){
+            frase=frase.replace(new RegExp(lista3[i],"gi"),lista2[i]);
+        }
+
+        for(var j=0;j<lista1.length;j++){
+            frase=frase.replace(new RegExp(lista2[j],"gi"),lista1[j]);
+        }
+        return frase
+    }
+
+    function Encriptar(frase){
+        var texto1=document.querySelector("textarea").value;
+        document.querySelector(".Texto2 p").innerHTML=EncripVocales(texto1)
+        document.querySelector("textarea").value="" 
+        document.getElementById("botonCop").style.display=""
+        document.getElementById("ImgMuñeco").style.display="none"
+        document.getElementById("textoN1").style.display="none"
+        document.getElementById("textoN2").style.display="none"
+        
+    }
+    
+    function Desencriptar(){
+        var texto1=document.querySelector("textarea").value;
+        document.querySelector(".Texto2 p").innerHTML=DesencripVocales(texto1) 
+        document.getElementById("botonCop").style.display=""
+    }
+
+    function Copiar(){
+        var rango = document.createRange();
+        rango.selectNodeContents(document.getElementById("TextoCuadro"));
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(rango);
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges()
+    }
+
+
+
+
+</script>
+
+</html>
+
